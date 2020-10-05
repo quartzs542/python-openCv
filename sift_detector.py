@@ -1,6 +1,6 @@
 import cv2
 
-img = cv2.imread('lotus.jpg')
+img = cv2.imread('IMAGE_NAME.jpg')
 gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 sift = cv2.SIFT_create()
