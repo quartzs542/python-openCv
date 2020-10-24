@@ -55,6 +55,82 @@ def imagesearcharea(image, x1, y1, x2, y2, precision=0.8, im=None):
         return [-1, -1]
     return max_loc
 
+'''
+Searchs for an image on screen continuously until it's found.
+
+input :
+image : path to the image file (see opencv imread for supported types)
+time : Waiting time after failing to find the image 
+precision : the higher, the lesser tolerant and fewer false positives are found default is 0.8
+
+returns :
+the top left corner coordinates of the element if found as an array [x,y] 
+
+'''
+
+
+def imagesearch_loop(image, timesample, precision=0.8):
+    pos = imagesearch(image, precision)
+    while pos[0] == -1:
+        print(image + " not found, waiting")
+        time.sleep(timesample)
+        pos = imagesearch(image, precision)
+    return pos
+
+
+'''
+Searchs for an image on screen continuously until it's found or max number of samples reached.
+
+input :
+image : path to the image file (see opencv imread for supported types)
+time : Waiting time after failing to find the image
+maxSamples: maximum number of samples before function times out.
+precision : the higher, the lesser tolerant and fewer false positives are found default is 0.8
+
+returns :
+the top left corner coordinates of the element if found as an array [x,y] 
+
+'''
+
+
+def imagesearch_numLoop(image, timesample, maxSamples, precision=0.8):
+    pos = imagesearch(image, precision)
+    count = 0
+    while pos[0] == -1:
+        print(image + " not found, waiting")
+        time.sleep(timesample)
+        pos = imagesearch(image, precision)
+        count = count + 1
+        if count > maxSamples:
+            break
+    return pos
+
+
+'''
+Searchs for an image on a region of the screen continuously until it's found.
+
+input :
+image : path to the image file (see opencv imread for supported types)
+time : Waiting time after failing to find the image 
+x1 : top left x value
+y1 : top left y value
+x2 : bottom right x value
+y2 : bottom right y value
+precision : the higher, the lesser tolerant and fewer false positives are found default is 0.8
+
+returns :
+the top left corner coordinates of the element as an array [x,y] 
+
+'''
+
+
+def imagesearch_region_loop(image, timesample, x1, y1, x2, y2, precision=0.8):
+    pos = imagesearcharea(image, x1, y1, x2, y2, precision)
+
+    while pos[0] == -1:
+        time.sleep(timesample)
+        pos = imagesearcharea(image, x1, y1, x2, y2, precision)
+    return pos
 
 #Usage 
 imagesearcharea("IMAGE_NAME.JPG", 0, 0, 1920, 1080, 0.8) 
