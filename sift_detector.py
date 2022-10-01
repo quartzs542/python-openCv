@@ -13,3 +13,4 @@ kp, des = sift.detectAndCompute(gray_img, None)
 kp_img = cv2.drawKeypoints(img, kp, None, color=(0, 255, 0), flags=cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 cv2.imshow('SIFT', kp_img)
 cv2.waitKey()
+
