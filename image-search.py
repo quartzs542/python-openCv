@@ -134,3 +134,4 @@ def imagesearch_region_loop(image, timesample, x1, y1, x2, y2, precision=0.8):
 
 #Usage 
 imagesearcharea("IMAGE_NAME.JPG", 0, 0, 1920, 1080, 0.8) 
+
