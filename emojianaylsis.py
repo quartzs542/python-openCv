@@ -33,6 +33,7 @@ def plotCorrelationMatrix(df, graphWidth):
     df = df[[col for col in df if df[col].nunique() > 1]] # keep columns where there are more than 1 unique values
     if df.shape[1] < 2:
         print(f('No correlation plots shown: The number of non-NaN or constant columns ((df.shape[1])) is less than 2'))
+        
         return
     corr = df.corr()
     plt.figure(num=None, figsize=(graphWidth, graphWidth), dpi=80, facecolor='w', edgecolor='k')
